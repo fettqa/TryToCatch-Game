@@ -2,7 +2,10 @@ package tc.model;
 
 public enum Figure {
 
-    P1("X"),P2("*");
+    P1F1("W"),
+    P1F2("V"),
+    P1F3("M"),
+    P2("*");
 
     Figure(String s) {
     }
