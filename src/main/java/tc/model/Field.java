@@ -30,7 +30,6 @@ public class Field {
         if(checkValidPoint(point)) {
             throw new InvalidPointException();
         }
-
         return field[point.x][point.y];
     }
 
