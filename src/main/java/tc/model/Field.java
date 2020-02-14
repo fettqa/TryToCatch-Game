@@ -17,6 +17,13 @@ public class Field {
 
     private final Figure[][] field = new Figure[FIELD_WIDTH][FIELD_HEIGHT];
 
+    public Field() {
+        field[1][2] = Figure.secondPlayer.FIGURE;
+        field[0][3] = Figure.firstPlayer.FIRST_FIGURE;
+        field[1][4] = Figure.firstPlayer.SECOND_FIGURE;
+        field[2][3] = Figure.firstPlayer.THIRD_FIGURE;
+    }
+
     public int getFieldWidth() {
         return FIELD_WIDTH;
     }
