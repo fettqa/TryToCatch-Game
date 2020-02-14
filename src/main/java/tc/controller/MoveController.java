@@ -15,9 +15,6 @@ public class MoveController {
                            final Figure figure,
                            final Point point,
                            final Direction direction) throws InvalidMoveDirection {
-        if(Direction.UP.equals(direction)){
-            playerTurn(field,figure,point,p -> new Point(p.x,p.y + 1));
-        }
         if(Direction.DOWN.equals(direction)){
             if (Figure.firstPlayer.FIRST_FIGURE.equals(figure) ||
                     Figure.firstPlayer.SECOND_FIGURE.equals(figure) ||
@@ -25,6 +22,9 @@ public class MoveController {
                 System.out.println("Игрок 2 не может делать ход вниз");
                 throw new InvalidMoveDirection();
             }
+            playerTurn(field,figure,point,p -> new Point(p.x,p.y + 1));
+        }
+        if(Direction.UP.equals(direction)){
             playerTurn(field,figure,point,p -> new Point(p.x,p.y - 1));
         }
         if(Direction.LEFT.equals(direction)){
@@ -42,7 +42,7 @@ public class MoveController {
             final Point nextPoint = directionPoint.next(point);
             try {
                 field.setFigure(nextPoint, figure);
-                field.setFigure(point, null);
+                field.deleteFigure(point);
             }
             catch (InvalidPointException e) {
                     System.out.println("Нельзя ходить за пределы поля!");
