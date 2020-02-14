@@ -45,10 +45,10 @@ public class Field {
         if(checkValidPoint(point)) {
             throw new InvalidPointException();
         }
-        if(field[point.x][point.y] != null) {
+        else if(field[point.x][point.y] != null) {
             throw new AlreadyOccupiedException();
         }
-        if((point.x == LEFT_COLUMN_LIMIT || point.x == RIGHT_COLUMN_LIMIT)) {
+        else if((point.x == LEFT_COLUMN_LIMIT || point.x == RIGHT_COLUMN_LIMIT)) {
             if (point.y == UPPER_ROW_LIMIT) {
                 isUpperOrBottomEdge(figure,UPPER_ROW_LIMIT );
             }
@@ -57,6 +57,13 @@ public class Field {
             }
         }
         field[point.x][point.y] = figure;
+    }
+
+    public void deleteFigure(final Point point) throws InvalidPointException {
+        if(checkValidPoint(point)) {
+            throw new InvalidPointException();
+        }
+        else field[point.x][point.y] = null;
     }
 
     private void isUpperOrBottomEdge(final Figure figure,final int row ) throws AlreadyOccupiedException {
