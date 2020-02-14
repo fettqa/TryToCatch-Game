@@ -1,12 +1,18 @@
 package tc.model;
 
-public enum Figure {
+public interface Figure {
 
-    P1F1("W"),
-    P1F2("V"),
-    P1F3("M"),
-    P2("*");
+    public enum firstPlayer implements Figure {
+        FIRST_FIGURE("W"),
+        SECOND_FIGURE("V"),
+        THIRD_FIGURE("M");
 
-    Figure(String s) {
+        firstPlayer(String w) {
+        }
+    }
+    public enum secondPlayer implements Figure {
+        FIGURE("*");
+        secondPlayer(String w) {
+        }
     }
 }
