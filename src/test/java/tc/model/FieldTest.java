@@ -28,7 +28,7 @@ class FieldTest {
     void setFigure() throws AlreadyOccupiedException, InvalidPointException {
         final Field field = new Field();
         final Point expectedPoint = new Point(2,2);
-        final Figure expectedFigure = Figure.P1F1;
+        final Figure expectedFigure = Figure.firstPlayer.FIRST_FIGURE;
 
         field.setFigure(expectedPoint,expectedFigure);
         final Figure actualFigure = field.getFigure(expectedPoint);
@@ -40,7 +40,7 @@ class FieldTest {
     void setFigureWhenPointAlreadyOccupied() throws AlreadyOccupiedException, InvalidPointException {
         final Field field = new Field();
         final Point expectedPoint = new Point(2,2);
-        final Figure expectedFigure = Figure.P1F1;
+        final Figure expectedFigure = Figure.firstPlayer.FIRST_FIGURE;
         field.setFigure(expectedPoint,expectedFigure);
         try {
             field.setFigure(expectedPoint,expectedFigure);
@@ -52,7 +52,7 @@ class FieldTest {
     void setFigureToBottomRow() throws AlreadyOccupiedException, InvalidPointException {
         final Field field = new Field();
         final Point expectedPoint = new Point(0,4);
-        final Figure expectedFigure = Figure.P1F1;
+        final Figure expectedFigure = Figure.firstPlayer.FIRST_FIGURE;
 
         field.setFigure(expectedPoint,expectedFigure);
         final Figure actualFigure = field.getFigure(expectedPoint);

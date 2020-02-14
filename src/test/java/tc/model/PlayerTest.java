@@ -15,7 +15,7 @@ class PlayerTest {
 
     @org.junit.jupiter.api.Test
     void getFigure() {
-        final Figure testFigure = Figure.P1;
+        final Figure testFigure = Figure.firstPlayer.FIRST_FIGURE;
         final Figure expectedFigure = testFigure;
         final Player player = new Player(null, testFigure);
         final Figure actualFigure = player.getFigure();
