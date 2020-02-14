@@ -26,4 +26,18 @@ class MoveControllerTest {
 
         assertEquals(currentFigure,expectedFigure);
     }
+
+    @Test
+    void moveFigureSecondPlayerTurn() throws InvalidPointException, InvalidMoveDirection {
+        final Field field = new Field();
+        final Point currentPoint = new Point(1,2);
+        final Figure currentFigure = field.getFigure(currentPoint);
+        final MoveController moveController = new MoveController();
+        moveController.moveFigure(field,currentFigure, currentPoint, Direction.DOWN);
+
+        final Point expectedPoint = new Point(1,3);
+        final Figure expectedFigure = field.getFigure(expectedPoint);
+
+        assertEquals(currentFigure,expectedFigure);
+    }
 }
