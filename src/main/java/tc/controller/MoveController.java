@@ -11,15 +11,13 @@ import java.awt.*;
 
 public class MoveController {
 
-    public static int ROW_OF_SECOND_PLAYER_LOCATION;
+    public static Point secondPlayerLocation = new Point();
 
-    public static int COLUMN_OF_SECOND_PLAYER_LOCATION;
+    public static Point firstPlayerLocationOf1stFigure = new Point();
 
-    public static int ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE;
+    public static Point firstPlayerLocationOf2ndFigure = new Point();
 
-    public static int ROW_OF_FIRST_PLAYER_LOCATION_OF_SECOND_FIGURE;
-
-    public static int ROW_OF_FIRST_PLAYER_LOCATION_OF_THIRD_FIGURE;
+    public static Point firstPlayerLocationOf3rdFigure = new Point();
 
     public void moveFigure(final Field field,
                            final Figure figure,
@@ -47,6 +45,19 @@ public class MoveController {
         }
     }
 
+    public void moveFigure(final Field field,
+                           final Figure figure,
+                           final Direction direction) throws    InvalidMoveDirection,
+            AlreadyOccupiedException,
+            InvalidPointException{
+        Point point = new Point();
+        if(Figure.firstPlayer.FIRST_FIGURE.equals(figure)) point = MoveController.firstPlayerLocationOf1stFigure;
+        if(Figure.firstPlayer.SECOND_FIGURE.equals(figure)) point = MoveController.firstPlayerLocationOf2ndFigure;
+        if(Figure.firstPlayer.THIRD_FIGURE.equals(figure)) point = MoveController.firstPlayerLocationOf3rdFigure;
+        if(Figure.secondPlayer.FIGURE.equals(figure)) point = MoveController.secondPlayerLocation;
+        moveFigure(field,figure,point,direction);
+    }
+
     private void playerTurn(final Field field,
                            final Figure figure,
                            final Point point,
@@ -63,20 +74,23 @@ public class MoveController {
 
     private void saveFigureLocation(final Figure figure, final Point point) {
         if(Figure.secondPlayer.FIGURE.equals(figure)) {
-            ROW_OF_SECOND_PLAYER_LOCATION = point.y;
-            COLUMN_OF_SECOND_PLAYER_LOCATION = point.x;
+            secondPlayerLocation.y = point.y;
+            secondPlayerLocation.x = point.x;
         }
 
         if(Figure.firstPlayer.FIRST_FIGURE.equals(figure)) {
-            ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE = point.y;
+            firstPlayerLocationOf1stFigure.y = point.y;
+            firstPlayerLocationOf1stFigure.x = point.x;
         }
 
         if(Figure.firstPlayer.SECOND_FIGURE.equals(figure)) {
-            ROW_OF_FIRST_PLAYER_LOCATION_OF_SECOND_FIGURE = point.y;
+            firstPlayerLocationOf2ndFigure.y = point.y;
+            firstPlayerLocationOf2ndFigure.x = point.x;
         }
 
         if(Figure.firstPlayer.THIRD_FIGURE.equals(figure)) {
-            ROW_OF_FIRST_PLAYER_LOCATION_OF_THIRD_FIGURE = point.y;
+            firstPlayerLocationOf3rdFigure.y = point.y;
+            firstPlayerLocationOf3rdFigure.x = point.x;
         }
     }
 }
