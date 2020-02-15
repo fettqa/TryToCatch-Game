@@ -2,17 +2,23 @@ package tc.model;
 
 public interface Figure {
 
-    enum firstPlayer implements Figure {
+    enum FirstPlayer implements Figure {
         FIRST_FIGURE("W"),
         SECOND_FIGURE("V"),
         THIRD_FIGURE("M");
 
-        firstPlayer(String w) {
+        FirstPlayer(String w) {
         }
     }
-    enum secondPlayer implements Figure {
+    enum SecondPlayer implements Figure {
         FIGURE("*");
-        secondPlayer(String w) {
+        SecondPlayer(String w) {
+        }
+    }
+
+    enum AngleOfField implements Figure {
+        ANGLE(" ");
+        AngleOfField(String s) {
         }
     }
 }
