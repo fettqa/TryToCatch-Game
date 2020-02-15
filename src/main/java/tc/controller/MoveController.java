@@ -19,6 +19,12 @@ public class MoveController {
 
     public static Point firstPlayerLocationOf3rdFigure = new Point();
 
+    public static int countOfMoves;
+
+    public boolean currentMove(){
+        return MoveController.countOfMoves % 2 == 0;
+    }
+
     public void moveFigure(final Field field,
                            final Figure figure,
                            final Point point,
@@ -67,6 +73,7 @@ public class MoveController {
             field.setFigure(nextPoint, figure, direction);
             saveFigureLocation(figure, nextPoint);
             field.deleteFigure(point);
+            countOfMoves += 1;
     }
 
     private interface IDirectionPoint {
