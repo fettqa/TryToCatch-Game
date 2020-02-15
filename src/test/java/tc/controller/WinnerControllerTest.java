@@ -44,4 +44,15 @@ class WinnerControllerTest {
         moveController.moveFigure(field, Figure.SecondPlayer.FIGURE, Direction.DOWN);
         assertTrue(winnerController.winnerIsSecondPlayer(field));
     }
+
+    @Test
+    void checkCurrentMove() throws InvalidPointException, AlreadyOccupiedException, InvalidMoveDirection {
+        Field field = new Field();
+        MoveController moveController = new MoveController();
+        moveController.moveFigure(field, Figure.FirstPlayer.FIRST_FIGURE, Direction.UP);
+        moveController.moveFigure(field, Figure.SecondPlayer.FIGURE, Direction.UP);
+        moveController.moveFigure(field, Figure.FirstPlayer.FIRST_FIGURE, Direction.UP);
+        moveController.moveFigure(field, Figure.SecondPlayer.FIGURE, Direction.UP);
+        assertTrue(moveController.currentMove());
+    }
 }
