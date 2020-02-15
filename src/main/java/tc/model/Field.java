@@ -1,5 +1,6 @@
 package tc.model;
 
+import tc.controller.MoveController;
 import tc.model.exceptions.AlreadyOccupiedException;
 import tc.model.exceptions.InvalidPointException;
 
@@ -19,9 +20,13 @@ public class Field {
 
     public Field() {
         field[1][2] = Figure.secondPlayer.FIGURE;
+        MoveController.ROW_OF_SECOND_PLAYER_LOCATION = 2;
         field[0][3] = Figure.firstPlayer.FIRST_FIGURE;
+        MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE = 3;
         field[1][4] = Figure.firstPlayer.SECOND_FIGURE;
+        MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_SECOND_FIGURE = 4;
         field[2][3] = Figure.firstPlayer.THIRD_FIGURE;
+        MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_THIRD_FIGURE = 3;
     }
 
     public int getFieldWidth() {
@@ -41,23 +46,30 @@ public class Field {
     }
 
     public void setFigure(final Point point,
-                          final Figure figure) throws InvalidPointException,AlreadyOccupiedException {
+                          final Figure figure,
+                          Direction direction) throws InvalidPointException,AlreadyOccupiedException {
         if(checkValidPoint(point)) {
             throw new InvalidPointException();
         }
-        else if(field[point.x][point.y] != null) {
+        if(field[point.x][point.y] != null) {
             throw new AlreadyOccupiedException();
         }
-        else if((point.x == LEFT_COLUMN_LIMIT || point.x == RIGHT_COLUMN_LIMIT)) {
-            if (point.y == UPPER_ROW_LIMIT) {
+        if((point.x == LEFT_COLUMN_LIMIT || point.x == RIGHT_COLUMN_LIMIT)) {
+            if (point.y == UPPER_ROW_LIMIT && Direction.UP.equals(direction) ) {
                 isUpperOrBottomEdge(figure,UPPER_ROW_LIMIT );
             }
-            if (point.y == BOTTOM_ROW_LIMIT) {
+            if (point.y == BOTTOM_ROW_LIMIT && Direction.DOWN.equals(direction)) {
                 isUpperOrBottomEdge(figure,BOTTOM_ROW_LIMIT );
             }
         }
         field[point.x][point.y] = figure;
     }
+
+    public void setFigure(final Point point,
+                          final Figure figure) throws InvalidPointException,AlreadyOccupiedException {
+        setFigure(point, figure, null);
+    }
+
 
     public void deleteFigure(final Point point) throws InvalidPointException {
         if(checkValidPoint(point)) {
