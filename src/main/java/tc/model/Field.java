@@ -19,18 +19,22 @@ public class Field {
     private final Figure[][] field = new Figure[FIELD_WIDTH][FIELD_HEIGHT];
 
     public Field() {
-        field[1][2] = Figure.secondPlayer.FIGURE;
+        field[1][2] = Figure.SecondPlayer.FIGURE;
         MoveController.secondPlayerLocation.x = 1;
         MoveController.secondPlayerLocation.y = 2;
-        field[0][3] = Figure.firstPlayer.FIRST_FIGURE;
+        field[0][3] = Figure.FirstPlayer.FIRST_FIGURE;
         MoveController.firstPlayerLocationOf1stFigure.x = 0;
         MoveController.firstPlayerLocationOf1stFigure.y = 3;
-        field[1][4] = Figure.firstPlayer.SECOND_FIGURE;
+        field[1][4] = Figure.FirstPlayer.SECOND_FIGURE;
         MoveController.firstPlayerLocationOf2ndFigure.x = 1;
         MoveController.firstPlayerLocationOf2ndFigure.y = 4;
-        field[2][3] = Figure.firstPlayer.THIRD_FIGURE;
+        field[2][3] = Figure.FirstPlayer.THIRD_FIGURE;
         MoveController.firstPlayerLocationOf3rdFigure.x = 2;
-        MoveController.firstPlayerLocationOf3rdFigure.x = 3;
+        MoveController.firstPlayerLocationOf3rdFigure.y = 3;
+        field[0][0] = Figure.AngleOfField.ANGLE;
+        field[2][0] = Figure.AngleOfField.ANGLE;
+        field[0][4] = Figure.AngleOfField.ANGLE;
+        field[2][4] = Figure.AngleOfField.ANGLE;
     }
 
     public int getFieldWidth() {
@@ -43,7 +47,7 @@ public class Field {
 
     public Figure getFigure(Point point) throws InvalidPointException {
 
-        if(checkValidPoint(point)) {
+        if(!checkTopAndBottomEdges(point.y) || !checkRightAndLeftEdges(point.x) ) {
             throw new InvalidPointException();
         }
         return field[point.x][point.y];
@@ -51,7 +55,7 @@ public class Field {
 
     public void setFigure(final Point point,
                           final Figure figure,
-                          Direction direction) throws InvalidPointException,AlreadyOccupiedException {
+                          final Direction direction) throws InvalidPointException,AlreadyOccupiedException {
         if(checkValidPoint(point)) {
             throw new InvalidPointException();
         }
@@ -89,8 +93,9 @@ public class Field {
                 field[MIDDLE_COLUMN][row] = figure;
             }
 
-    private boolean checkValidPoint(final Point point) {
-        return !checkRightAndLeftEdges(point.x) || !checkTopAndBottomEdges(point.y);
+    private boolean checkValidPoint(final Point point) throws InvalidPointException {
+        return (!checkRightAndLeftEdges(point.x) || !checkTopAndBottomEdges(point.y)) &&
+                !Figure.AngleOfField.ANGLE.equals(getFigure(point));
     }
 
     private boolean checkTopAndBottomEdges (final int coordinate) {
