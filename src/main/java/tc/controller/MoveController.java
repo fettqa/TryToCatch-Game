@@ -13,6 +13,8 @@ public class MoveController {
 
     public static int ROW_OF_SECOND_PLAYER_LOCATION;
 
+    public static int COLUMN_OF_SECOND_PLAYER_LOCATION;
+
     public static int ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE;
 
     public static int ROW_OF_FIRST_PLAYER_LOCATION_OF_SECOND_FIGURE;
@@ -51,7 +53,7 @@ public class MoveController {
                            final IDirectionPoint directionPoint) throws AlreadyOccupiedException, InvalidPointException {
             final Point nextPoint = directionPoint.next(point);
             field.setFigure(nextPoint, figure);
-            saveFigureLocation(figure, nextPoint.y);
+            saveFigureLocation(figure, nextPoint);
             field.deleteFigure(point);
     }
 
@@ -59,21 +61,22 @@ public class MoveController {
         Point next(final Point point);
     }
 
-    private void saveFigureLocation(final Figure figure, final int numberOfRow) {
+    private void saveFigureLocation(final Figure figure, final Point point) {
         if(Figure.secondPlayer.FIGURE.equals(figure)) {
-            ROW_OF_SECOND_PLAYER_LOCATION = numberOfRow;
+            ROW_OF_SECOND_PLAYER_LOCATION = point.y;
+            COLUMN_OF_SECOND_PLAYER_LOCATION = point.x;
         }
 
         if(Figure.firstPlayer.FIRST_FIGURE.equals(figure)) {
-            ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE = numberOfRow;
+            ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE = point.y;
         }
 
         if(Figure.firstPlayer.SECOND_FIGURE.equals(figure)) {
-            ROW_OF_FIRST_PLAYER_LOCATION_OF_SECOND_FIGURE = numberOfRow;
+            ROW_OF_FIRST_PLAYER_LOCATION_OF_SECOND_FIGURE = point.y;
         }
 
         if(Figure.firstPlayer.THIRD_FIGURE.equals(figure)) {
-            ROW_OF_FIRST_PLAYER_LOCATION_OF_THIRD_FIGURE = numberOfRow;
+            ROW_OF_FIRST_PLAYER_LOCATION_OF_THIRD_FIGURE = point.y;
         }
     }
 }
