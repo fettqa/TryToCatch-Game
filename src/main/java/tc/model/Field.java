@@ -20,13 +20,17 @@ public class Field {
 
     public Field() {
         field[1][2] = Figure.secondPlayer.FIGURE;
-        MoveController.ROW_OF_SECOND_PLAYER_LOCATION = 2;
+        MoveController.secondPlayerLocation.x = 1;
+        MoveController.secondPlayerLocation.y = 2;
         field[0][3] = Figure.firstPlayer.FIRST_FIGURE;
-        MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE = 3;
+        MoveController.firstPlayerLocationOf1stFigure.x = 0;
+        MoveController.firstPlayerLocationOf1stFigure.y = 3;
         field[1][4] = Figure.firstPlayer.SECOND_FIGURE;
-        MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_SECOND_FIGURE = 4;
+        MoveController.firstPlayerLocationOf2ndFigure.x = 1;
+        MoveController.firstPlayerLocationOf2ndFigure.y = 4;
         field[2][3] = Figure.firstPlayer.THIRD_FIGURE;
-        MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_THIRD_FIGURE = 3;
+        MoveController.firstPlayerLocationOf3rdFigure.x = 2;
+        MoveController.firstPlayerLocationOf3rdFigure.x = 3;
     }
 
     public int getFieldWidth() {
