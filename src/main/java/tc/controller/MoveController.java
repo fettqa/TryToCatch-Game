@@ -11,10 +11,20 @@ import java.awt.*;
 
 public class MoveController {
 
+    public static int ROW_OF_SECOND_PLAYER_LOCATION;
+
+    public static int ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE;
+
+    public static int ROW_OF_FIRST_PLAYER_LOCATION_OF_SECOND_FIGURE;
+
+    public static int ROW_OF_FIRST_PLAYER_LOCATION_OF_THIRD_FIGURE;
+
     public void moveFigure(final Field field,
                            final Figure figure,
                            final Point point,
-                           final Direction direction) throws InvalidMoveDirection {
+                           final Direction direction) throws    InvalidMoveDirection,
+                                                                AlreadyOccupiedException,
+                                                                InvalidPointException {
         if(Direction.DOWN.equals(direction)){
             if (Figure.firstPlayer.FIRST_FIGURE.equals(figure) ||
                     Figure.firstPlayer.SECOND_FIGURE.equals(figure) ||
@@ -35,25 +45,35 @@ public class MoveController {
         }
     }
 
-        private void playerTurn(final Field field,
+    private void playerTurn(final Field field,
                            final Figure figure,
                            final Point point,
-                           final IDirectionPoint directionPoint) {
+                           final IDirectionPoint directionPoint) throws AlreadyOccupiedException, InvalidPointException {
             final Point nextPoint = directionPoint.next(point);
-            try {
-                field.setFigure(nextPoint, figure);
-                field.deleteFigure(point);
-            }
-            catch (InvalidPointException e) {
-                    System.out.println("Нельзя ходить за пределы поля!");
-                } catch (AlreadyOccupiedException e) {
-                    System.out.println("Ход невозможен, клетка занята!");
-                }
-            }
+            field.setFigure(nextPoint, figure);
+            saveFigureLocation(figure, nextPoint.y);
+            field.deleteFigure(point);
+    }
 
-        private interface IDirectionPoint {
-            Point next(final Point point);
+    private interface IDirectionPoint {
+        Point next(final Point point);
+    }
+
+    private void saveFigureLocation(final Figure figure, final int numberOfRow) {
+        if(Figure.secondPlayer.FIGURE.equals(figure)) {
+            ROW_OF_SECOND_PLAYER_LOCATION = numberOfRow;
         }
 
+        if(Figure.firstPlayer.FIRST_FIGURE.equals(figure)) {
+            ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE = numberOfRow;
+        }
 
+        if(Figure.firstPlayer.SECOND_FIGURE.equals(figure)) {
+            ROW_OF_FIRST_PLAYER_LOCATION_OF_SECOND_FIGURE = numberOfRow;
+        }
+
+        if(Figure.firstPlayer.THIRD_FIGURE.equals(figure)) {
+            ROW_OF_FIRST_PLAYER_LOCATION_OF_THIRD_FIGURE = numberOfRow;
+        }
+    }
 }
