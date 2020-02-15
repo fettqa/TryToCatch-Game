@@ -62,7 +62,7 @@ public class MoveController {
                            final Figure figure,
                            final Point point,
                            final IDirectionPoint directionPoint,
-                            final Direction direction) throws AlreadyOccupiedException, InvalidPointException {
+                           final Direction direction) throws AlreadyOccupiedException, InvalidPointException {
             final Point nextPoint = directionPoint.next(point);
             field.setFigure(nextPoint, figure, direction);
             saveFigureLocation(figure, nextPoint);
