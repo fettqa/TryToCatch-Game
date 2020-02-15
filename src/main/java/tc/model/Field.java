@@ -59,16 +59,19 @@ public class Field {
         if(checkValidPoint(point)) {
             throw new InvalidPointException();
         }
+        if (Figure.AngleOfField.ANGLE.equals(getFigure(point))){
+                if (Direction.UP.equals(direction)) {
+                    isUpperOrBottomEdge(figure, UPPER_ROW_LIMIT);
+                    return;
+                }
+                if (Direction.DOWN.equals(direction)) {
+                    isUpperOrBottomEdge(figure, BOTTOM_ROW_LIMIT);
+                    return;
+                }
+                throw new InvalidPointException();
+        }
         if(field[point.x][point.y] != null) {
             throw new AlreadyOccupiedException();
-        }
-        if((point.x == LEFT_COLUMN_LIMIT || point.x == RIGHT_COLUMN_LIMIT)) {
-            if (point.y == UPPER_ROW_LIMIT && Direction.UP.equals(direction) ) {
-                isUpperOrBottomEdge(figure,UPPER_ROW_LIMIT );
-            }
-            if (point.y == BOTTOM_ROW_LIMIT && Direction.DOWN.equals(direction)) {
-                isUpperOrBottomEdge(figure,BOTTOM_ROW_LIMIT );
-            }
         }
         field[point.x][point.y] = figure;
     }
