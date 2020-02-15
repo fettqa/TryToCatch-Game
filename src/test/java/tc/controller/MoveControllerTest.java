@@ -26,6 +26,8 @@ class MoveControllerTest {
         final Figure expectedFigure = field.getFigure(expectedPoint);
 
         assertEquals(currentFigure,expectedFigure);
+        assertNull(field.getFigure(currentPoint));
+        assertEquals(2, MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE);
     }
     @Test
     void moveDownFigureFirstPlayer() throws InvalidPointException {
@@ -40,6 +42,7 @@ class MoveControllerTest {
         } catch (InvalidMoveDirection | AlreadyOccupiedException | InvalidPointException e) {
         }
         assertEquals(currentFigure,field.getFigure(currentPoint));
+        assertEquals(3, MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE);
     }
 
     @Test
@@ -55,6 +58,7 @@ class MoveControllerTest {
 
         assertEquals(currentFigure,expectedFigure);
         assertNull(field.getFigure(currentPoint));
+        assertEquals(3, MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE);
     }
 
     @Test
@@ -70,6 +74,7 @@ class MoveControllerTest {
 
         assertEquals(currentFigure,expectedFigure);
         assertNull(field.getFigure(currentPoint));
+        assertEquals(3, MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE);
     }
 
     @Test
@@ -83,6 +88,7 @@ class MoveControllerTest {
             fail();
         }catch (InvalidPointException e){}
         assertEquals(currentFigure,field.getFigure(currentPoint));
+        assertEquals(MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE, 3);
     }
 
     @Test
@@ -100,6 +106,7 @@ class MoveControllerTest {
         }catch (AlreadyOccupiedException e) {}
         assertEquals(firstCurrentFigure, field.getFigure(firstFigurePoint));
         assertNull(field.getFigure(secondFigurePoint));
+        assertEquals(3, MoveController.ROW_OF_FIRST_PLAYER_LOCATION_OF_FIRST_FIGURE);
     }
 
     @Test
@@ -114,6 +121,9 @@ class MoveControllerTest {
         final Figure expectedFigure = field.getFigure(expectedPoint);
 
         assertEquals(currentFigure,expectedFigure);
+        assertEquals(3, MoveController.ROW_OF_SECOND_PLAYER_LOCATION);
+        assertEquals(1, MoveController.COLUMN_OF_SECOND_PLAYER_LOCATION);
+
     }
 
     @Test
@@ -128,6 +138,8 @@ class MoveControllerTest {
         final Figure expectedFigure = field.getFigure(expectedPoint);
 
         assertEquals(currentFigure,expectedFigure);
+        assertEquals(1, MoveController.ROW_OF_SECOND_PLAYER_LOCATION);
+        assertEquals(1, MoveController.COLUMN_OF_SECOND_PLAYER_LOCATION);
     }
 
     @Test
@@ -142,6 +154,8 @@ class MoveControllerTest {
         final Figure expectedFigure = field.getFigure(expectedPoint);
 
         assertEquals(currentFigure,expectedFigure);
+        assertEquals(2, MoveController.ROW_OF_SECOND_PLAYER_LOCATION);
+        assertEquals(0, MoveController.COLUMN_OF_SECOND_PLAYER_LOCATION);
     }
     @Test
     void moveRightFigureSecondPlayer() throws InvalidPointException, InvalidMoveDirection, AlreadyOccupiedException {
@@ -155,6 +169,8 @@ class MoveControllerTest {
         final Figure expectedFigure = field.getFigure(expectedPoint);
 
         assertEquals(currentFigure,expectedFigure);
+        assertEquals(2, MoveController.ROW_OF_SECOND_PLAYER_LOCATION);
+        assertEquals(2, MoveController.COLUMN_OF_SECOND_PLAYER_LOCATION);
     }
 }
 
