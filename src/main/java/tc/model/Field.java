@@ -35,6 +35,7 @@ public class Field {
         field[2][0] = Figure.AngleOfField.ANGLE;
         field[0][4] = Figure.AngleOfField.ANGLE;
         field[2][4] = Figure.AngleOfField.ANGLE;
+        MoveController.countOfMoves = 0;
     }
 
     public int getFieldWidth() {
@@ -94,6 +95,10 @@ public class Field {
                     throw new AlreadyOccupiedException();
                 }
                 field[MIDDLE_COLUMN][row] = figure;
+        if(Figure.FirstPlayer.FIRST_FIGURE.equals(figure)) MoveController.firstPlayerLocationOf1stFigure = new Point(MIDDLE_COLUMN,row);
+        if(Figure.FirstPlayer.SECOND_FIGURE.equals(figure)) MoveController.firstPlayerLocationOf2ndFigure = new Point(MIDDLE_COLUMN,row);
+        if(Figure.FirstPlayer.THIRD_FIGURE.equals(figure)) MoveController.firstPlayerLocationOf3rdFigure = new Point(MIDDLE_COLUMN,row);
+        if(Figure.SecondPlayer.FIGURE.equals(figure)) MoveController.secondPlayerLocation = new Point(MIDDLE_COLUMN,row);;
             }
 
     private boolean checkValidPoint(final Point point) throws InvalidPointException {

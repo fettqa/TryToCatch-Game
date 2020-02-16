@@ -12,31 +12,39 @@ public class WinnerController {
 
     public boolean winnerIsSecondPlayer(Field field) {
         Figure PlayerTwoFigure = Figure.SecondPlayer.FIGURE;
-        if(MoveController.firstPlayerLocationOf1stFigure.y < MoveController.secondPlayerLocation.y ||
-        MoveController.firstPlayerLocationOf2ndFigure.y < MoveController.secondPlayerLocation.y ||
-        MoveController.firstPlayerLocationOf3rdFigure.y < MoveController.secondPlayerLocation.y) {
-            return true;
+        if (MoveController.firstPlayerLocationOf1stFigure.y < MoveController.secondPlayerLocation.y &&
+                MoveController.firstPlayerLocationOf2ndFigure.y < MoveController.secondPlayerLocation.y &&
+                MoveController.firstPlayerLocationOf3rdFigure.y < MoveController.secondPlayerLocation.y) {
+            return false;
         }
-        try{
-            field.setFigure(new Point(MoveController.secondPlayerLocation.x,MoveController.secondPlayerLocation.y + 1),PlayerTwoFigure,Direction.DOWN);
+        try {
+            if (field.getFigure(new Point(MoveController.secondPlayerLocation.x, MoveController.secondPlayerLocation.y + 1)) != null &&
+                    field.getFigure(new Point(MoveController.secondPlayerLocation.x, MoveController.secondPlayerLocation.y - 1)) != null &&
+                    field.getFigure(new Point(MoveController.secondPlayerLocation.x + 1, MoveController.secondPlayerLocation.y)) != null &&
+                    field.getFigure(new Point(MoveController.secondPlayerLocation.x - 1, MoveController.secondPlayerLocation.y)) != null) {
+            }
             return true;
-        } catch (AlreadyOccupiedException | InvalidPointException e){
+        } catch (InvalidPointException e) {
             try {
-                field.setFigure(new Point(MoveController.secondPlayerLocation.x,MoveController.secondPlayerLocation.y - 1),PlayerTwoFigure,Direction.UP);
-                return true;
-            } catch (AlreadyOccupiedException | InvalidPointException r) {
-                try {
-                    field.setFigure(new Point(MoveController.secondPlayerLocation.x + 1,MoveController.secondPlayerLocation.y),PlayerTwoFigure, Direction.RIGHT);
+                if (field.getFigure(new Point(MoveController.secondPlayerLocation.x, MoveController.secondPlayerLocation.y - 1)) != null &&
+                        field.getFigure(new Point(MoveController.secondPlayerLocation.x + 1, MoveController.secondPlayerLocation.y)) != null &&
+                        field.getFigure(new Point(MoveController.secondPlayerLocation.x - 1, MoveController.secondPlayerLocation.y)) != null)
                     return true;
-                }catch (AlreadyOccupiedException | InvalidPointException t) {
-                    try{
-                        field.setFigure(new Point(MoveController.secondPlayerLocation.x - 1,MoveController.secondPlayerLocation.y),PlayerTwoFigure, Direction.LEFT);
+            } catch (InvalidPointException r) {
+                try {
+                    if (field.getFigure(new Point(MoveController.secondPlayerLocation.x + 1, MoveController.secondPlayerLocation.y)) != null &&
+                            field.getFigure(new Point(MoveController.secondPlayerLocation.x - 1, MoveController.secondPlayerLocation.y)) != null)
                         return true;
-                    }catch (AlreadyOccupiedException | InvalidPointException y){
+                } catch (InvalidPointException t) {
+                    try {
+                        if (field.getFigure(new Point(MoveController.secondPlayerLocation.x - 1, MoveController.secondPlayerLocation.y)) != null)
+                            return true;
+                    } catch (InvalidPointException y) {
                         return false;
                     }
                 }
             }
         }
+        return true;
     }
 }

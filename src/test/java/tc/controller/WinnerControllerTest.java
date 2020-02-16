@@ -50,9 +50,12 @@ class WinnerControllerTest {
         Field field = new Field();
         MoveController moveController = new MoveController();
         moveController.moveFigure(field, Figure.FirstPlayer.FIRST_FIGURE, Direction.UP);
+        try {
+            moveController.moveFigure(field, Figure.FirstPlayer.FIRST_FIGURE, Direction.LEFT);
+        }catch (InvalidPointException e){}
         moveController.moveFigure(field, Figure.SecondPlayer.FIGURE, Direction.UP);
         moveController.moveFigure(field, Figure.FirstPlayer.FIRST_FIGURE, Direction.UP);
         moveController.moveFigure(field, Figure.SecondPlayer.FIGURE, Direction.UP);
-        assertTrue(moveController.currentMove());
+        assertTrue(MoveController.currentMove());
     }
 }

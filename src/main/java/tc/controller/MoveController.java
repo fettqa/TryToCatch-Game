@@ -21,7 +21,7 @@ public class MoveController {
 
     public static int countOfMoves;
 
-    public boolean currentMove(){
+    public static boolean currentMove(){
         return MoveController.countOfMoves % 2 == 0;
     }
 
